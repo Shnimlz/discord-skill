@@ -1,9 +1,11 @@
-# 🤖 discord-skill
+<h1 align="center">🤖 discord-skill</h1>
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-[![Discord.js Ecosystem](https://img.shields.io/badge/discord.js-monorepo-5865F2.svg)](https://discord.js.org)
-[![Agent Skill](https://img.shields.io/badge/Agent%20Skill-Cross--Runtime-orange.svg)](https://github.com/features/copilot)
-[![HyperFrames](https://img.shields.io/badge/Video-HyperFrames-FF0055.svg)](https://github.com/heygen-com/hyperframes)
+<p align="center">
+  <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License: MIT"></a>
+  <a href="https://discord.js.org"><img src="https://img.shields.io/badge/discord.js-monorepo-5865F2.svg" alt="Discord.js Ecosystem"></a>
+  <a href="https://github.com/features/copilot"><img src="https://img.shields.io/badge/Agent%20Skill-Cross--Runtime-orange.svg" alt="Agent Skill"></a>
+  <a href="https://github.com/heygen-com/hyperframes"><img src="https://img.shields.io/badge/Video-HyperFrames-FF0055.svg" alt="HyperFrames"></a>
+</p>
 
 **`discord-skill`** es una suite dual de **Agent Skill (para IAs)** y **CLI de Auditoría (para desarrolladores)** diseñada para explorar, auditar y aprovechar todo el ecosistema modular de **Discord.js** y la **Discord API**.
 
@@ -17,9 +19,8 @@ El ecosistema de Discord.js no es solo una librería; es un monorepo masivo de c
   <img src="assets/demo.gif" alt="discord-skill HyperFrames Demo Video" width="100%" style="border-radius: 14px; border: 1px solid rgba(255,255,255,0.08); box-shadow: 0 20px 50px rgba(0,0,0,0.6);" />
 </p>
 
-> 🎥 **Video Renderizado:** Reproducción interactiva animada generada con [**HyperFrames**](https://github.com/heygen-com/hyperframes) y capturada con Playwright. También disponible en formato de video original en [`assets/demo.webm`](assets/demo.webm).
-
 ### Previsualizar o Compilar el Video Localmente:
+
 ```bash
 # 1. Previsualizar la composición interactiva en vivo con HyperFrames:
 npx hyperframes preview media/hyperframes-demo
