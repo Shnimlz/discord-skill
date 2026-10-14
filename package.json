@@ -1,0 +1,47 @@
+{
+  "name": "discord-skill",
+  "version": "1.0.0",
+  "description": "Cross-runtime Agent Skill & Developer CLI for the entire Discord.js and Discord API ecosystem",
+  "main": "dist/index.js",
+  "type": "module",
+  "bin": {
+    "discord-skill": "./dist/cli/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "cli": "tsx src/cli/index.ts",
+    "audit": "tsx src/cli/index.ts audit",
+    "diff": "tsx src/cli/index.ts diff",
+    "extract": "tsx src/cli/index.ts extract",
+    "baseline": "tsx src/cli/index.ts baseline"
+  },
+  "keywords": [
+    "discord",
+    "discord.js",
+    "discord-api",
+    "agent-skill",
+    "antigravity",
+    "claude-skill",
+    "audit",
+    "bot-development",
+    "reverse-engineering"
+  ],
+  "author": "DDC & Bot Developer Community",
+  "license": "MIT",
+  "devDependencies": {
+    "@discordjs/brokers": "^0.2.1",
+    "@discordjs/builders": "^1.11.0",
+    "@discordjs/collection": "^2.1.1",
+    "@discordjs/core": "^2.6.0",
+    "@discordjs/formatters": "^0.6.0",
+    "@discordjs/proxy": "^1.1.0",
+    "@discordjs/rest": "^2.6.3",
+    "@discordjs/voice": "^0.18.0",
+    "@discordjs/ws": "^2.0.4",
+    "@types/node": "^22.0.0",
+    "discord-api-types": "^0.37.119",
+    "discord.js": "^14.26.5",
+    "tsx": "^4.19.0",
+    "typescript": "^5.6.0"
+  }
+}
