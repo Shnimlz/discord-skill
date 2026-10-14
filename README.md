@@ -7,33 +7,13 @@
   <a href="https://github.com/heygen-com/hyperframes"><img src="https://img.shields.io/badge/Video-HyperFrames-FF0055.svg" alt="HyperFrames"></a>
 </p>
 
-**`discord-skill`** es una suite dual de **Agent Skill (para IAs)** y **CLI de Auditoría (para desarrolladores)** diseñada para explorar, auditar y aprovechar todo el ecosistema modular de **Discord.js** y la **Discord API**.
-
-El ecosistema de Discord.js no es solo una librería; es un monorepo masivo de componentes (`core`, `ws`, `rest`, `voice`, `builders`, `brokers`, `proxy`, `collection`, `formatters`, `discord-api-types`). `discord-skill` permite auditar cambios de contrato entre versiones, optimizar el uso de memoria y aplicar patrones arquitectónicos de alto rendimiento.
-
----
-
-## 🎬 Demostración en Video
-
 <p align="center">
   <img src="assets/demo.gif" alt="discord-skill HyperFrames Demo Video" width="100%" style="border-radius: 14px; border: 1px solid rgba(255,255,255,0.08); box-shadow: 0 20px 50px rgba(0,0,0,0.6);" />
 </p>
 
-### Previsualizar o Compilar el Video Localmente:
+**`discord-skill`** es una suite dual de **Agent Skill (para IAs)** y **CLI de Auditoría (para desarrolladores)** diseñada para explorar, auditar y aprovechar todo el ecosistema modular de **Discord.js** y la **Discord API**.
 
-```bash
-# 1. Previsualizar la composición interactiva en vivo con HyperFrames:
-npx hyperframes preview media/hyperframes-demo
-
-# 2. Renderizar a video determinista con HyperFrames CLI:
-npx hyperframes render media/hyperframes-demo -o assets/demo.mp4
-
-# 3. O re-grabar el video y GIF con Playwright:
-node scripts/record-demo.mjs
-python scripts/build-gif.py
-```
-
----
+El ecosistema de Discord.js no es solo una librería; es un monorepo masivo de componentes (`core`, `ws`, `rest`, `voice`, `builders`, `brokers`, `proxy`, `collection`, `formatters`, `discord-api-types`). `discord-skill` permite auditar cambios de contrato entre versiones, optimizar el uso de memoria y aplicar patrones arquitectónicos de alto rendimiento.
 
 ## ⚡ Instalación en un Solo Comando (Multi-Runtime)
 
