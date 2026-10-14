@@ -1,6 +1,6 @@
 import type { DiscordPackageMetadata } from './types.js';
 
-export const DISCORD_ECOSYSTEM_PACKAGES: Record<string, DiscordPackageMetadata> = {
+export const DISCORD_ECOSYSTEM_PACKAGES = {
   'discord.js': {
     name: 'discord.js',
     version: '14.26.5',
@@ -91,4 +91,4 @@ export const DISCORD_ECOSYSTEM_PACKAGES: Record<string, DiscordPackageMetadata> 
     role: 'facade',
     description: 'Bleeding-edge canary evolution branch targeting next-generation architectural changes.',
   },
-};
+} satisfies Record<string, DiscordPackageMetadata>;

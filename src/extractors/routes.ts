@@ -2,6 +2,7 @@ export async function extractDiscordRoutes(): Promise<string[]> {
   try {
     // Dynamic import to inspect installed discord-api-types
     const apiTypes = await import('discord-api-types/v10');
+
     if (apiTypes.Routes) {
       return Object.keys(apiTypes.Routes).sort();
     }

@@ -9,6 +9,7 @@
   },
   "scripts": {
     "build": "tsc",
+    "lint": "oxlint",
     "cli": "tsx src/cli/index.ts",
     "audit": "tsx src/cli/index.ts audit",
     "diff": "tsx src/cli/index.ts diff",
@@ -41,6 +42,8 @@
     "@types/node": "^22.0.0",
     "discord-api-types": "^0.37.119",
     "discord.js": "^14.26.5",
+    "@oxlint/plugins": "1.88.0",
+    "oxlint": "1.88.0",
     "tsx": "^4.19.0",
     "typescript": "^5.6.0"
   }

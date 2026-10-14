@@ -1,6 +1,7 @@
 export async function extractBuilderComponents(): Promise<string[]> {
   try {
     const builders = await import('@discordjs/builders');
+
     return Object.keys(builders)
       .filter((k) => k.endsWith('Builder'))
       .sort();

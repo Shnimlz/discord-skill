@@ -1,6 +1,7 @@
 export async function extractGatewayEvents(): Promise<string[]> {
   try {
     const apiTypes = await import('discord-api-types/v10');
+
     if (apiTypes.GatewayDispatchEvents) {
       return Object.values(apiTypes.GatewayDispatchEvents).sort();
     }

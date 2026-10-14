@@ -1,0 +1,25 @@
+# Upstream Provenance: Anti-Slop Oxlint Plugin
+
+- **Source**: Vendored from `@anti-slop` plugin skill (`C:/Users/Shni/.gemini/config/plugins/anti-slop`).
+- **Installed at**: `tools/oxlint/anti-slop/`
+- **Registered in**: `.oxlintrc.json`
+- **Rules applied**:
+  - `oxc/no-accumulating-spread`
+  - `anti-slop/no-array-filter-map`
+  - `anti-slop/no-reduce-accumulator-copy`
+  - `anti-slop/no-chained-type-assertions`
+  - `anti-slop/no-conditional-empty-object-spread`
+  - `anti-slop/no-known-value-widening`
+  - `anti-slop/no-module-mocking`
+  - `anti-slop/no-object-parameters`
+  - `anti-slop/no-reflect-apply`
+  - `anti-slop/no-reflect-get`
+  - `anti-slop/no-runtime-typeof`
+  - `anti-slop/no-shape-in-symbol-names`
+  - `anti-slop/no-unknown-parameters`
+  - `anti-slop/no-unknown-returns`
+  - `anti-slop/no-unknown-type-aliases`
+  - `anti-slop/no-unsafe-dictionary-type`
+  - `anti-slop/no-widen-then-assert`
+  - `anti-slop/require-readable-spacing`
+  - `anti-slop/require-safety-comment-for-type-assertion`

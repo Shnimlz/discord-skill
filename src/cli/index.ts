@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-import { parseArgs } from 'node:util';
 import * as fs from 'node:fs';
 import * as path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -7,7 +6,6 @@ import { DISCORD_ECOSYSTEM_PACKAGES } from '../core/registry.js';
 import { extractDiscordRoutes } from '../extractors/routes.js';
 import { extractGatewayEvents } from '../extractors/gateway.js';
 import { extractBuilderComponents } from '../extractors/builders.js';
-import { compareBaselines } from '../comparator/diff.js';
 import type { PackageBaseline } from '../core/types.js';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -19,6 +17,7 @@ async function getBaseline(): Promise<PackageBaseline> {
   if (fs.existsSync(BASELINE_PATH)) {
     return JSON.parse(fs.readFileSync(BASELINE_PATH, 'utf-8'));
   }
+
   return generateBaseline();
 }
 
@@ -28,6 +27,7 @@ async function generateBaseline(): Promise<PackageBaseline> {
   const builders = await extractBuilderComponents();
 
   const packages: Record<string, string> = {};
+
   for (const [k, v] of Object.entries(DISCORD_ECOSYSTEM_PACKAGES)) {
     packages[k] = v.version;
   }
@@ -41,10 +41,13 @@ async function generateBaseline(): Promise<PackageBaseline> {
   };
 
   const dir = path.dirname(BASELINE_PATH);
+
   if (!fs.existsSync(dir)) {
     fs.mkdirSync(dir, { recursive: true });
   }
+
   fs.writeFileSync(BASELINE_PATH, JSON.stringify(baseline, null, 2), 'utf-8');
+
   return baseline;
 }
 
@@ -74,6 +77,7 @@ async function main() {
     console.log(`  • Eventos Gateway disponibles: ${events.length}`);
     console.log(`  • Component Builders activos: ${builders.length}`);
     console.log(`\nUsa 'discord-skill baseline' para congelar el estado actual.`);
+
     return;
   }
 
@@ -81,6 +85,7 @@ async function main() {
     console.log(`Generando línea base (baseline) en: ${BASELINE_PATH}`);
     const baseline = await generateBaseline();
     console.log(`✅ Baseline guardado con éxito (${Object.keys(baseline.packages).length} paquetes).`);
+
     return;
   }
 
@@ -94,16 +99,19 @@ async function main() {
     }
 
     const targetPkgJson = JSON.parse(fs.readFileSync(resolvedPath, 'utf-8'));
+
     const dependencies = {
-      ...(targetPkgJson.dependencies || {}),
-      ...(targetPkgJson.devDependencies || {}),
+      ...targetPkgJson.dependencies,
+      ...targetPkgJson.devDependencies,
     };
 
     const baseline = await getBaseline();
     console.log(`Comparando dependencias en ${targetPath} contra la línea base de discord-skill...\n`);
 
     let driftFound = false;
+
     for (const [pkg, targetVer] of Object.entries(dependencies)) {
+      // SAFETY: Package manifest dependencies values are guaranteed to be version strings
       const cleanVer = (targetVer as string).replace(/[\^~]/g, '');
       const baseVer = baseline.packages[pkg];
 
@@ -124,11 +132,13 @@ async function main() {
     } else {
       console.log(`\nPuedes ejecutar 'discord-skill update <paquete>' para actualizar la línea base.`);
     }
+
     return;
   }
 
   if (command === 'update') {
     const pkgName = args[1];
+
     if (!pkgName) {
       console.error(`❌ Debes especificar el nombre del paquete. Ejemplo: discord-skill update discord.js`);
       process.exit(1);
@@ -138,6 +148,7 @@ async function main() {
     console.log(`Buscando actualización para '${pkgName}'...`);
     console.log(`Versión actual en baseline: ${baseline.packages[pkgName] || 'No registrado'}`);
     console.log(`💡 Para sincronizar con el proyecto actual, ejecuta 'discord-skill baseline'.`);
+
     return;
   }
 
@@ -154,6 +165,7 @@ async function main() {
     console.log(`     rea compare-javascript-export-shapes --left <ev1> --right <ev2> --json\n`);
     console.log(`  4. Depuración Pasiva de Discord Activities (CDP):`);
     console.log(`     rea list-browser-targets --json`);
+
     return;
   }
 

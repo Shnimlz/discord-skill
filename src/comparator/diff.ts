@@ -14,6 +14,7 @@ export function compareBaselines(previous: PackageBaseline, current: PackageBase
 
   for (const [pkg, currVer] of Object.entries(current.packages)) {
     const prevVer = previous.packages[pkg];
+
     if (prevVer && prevVer !== currVer) {
       packageVersionChanges[pkg] = { from: prevVer, to: currVer };
     }
