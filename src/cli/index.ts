@@ -141,11 +141,28 @@ async function main() {
     return;
   }
 
+  if (command === 'rea') {
+    console.log(`=== MÓDULO DE INGENIERÍA INVERSA (REA INTEGRATION) ===\n`);
+    console.log(`Reglas y límites: .agents/rules/discord-rea-boundary.md`);
+    console.log(`Guía técnica:     .agents/skills/discord-skill/references/rea-discord-investigations.md\n`);
+    console.log(`Capacidades de REA aplicadas a Discord:`);
+    console.log(`  1. Análisis de ASAR Electron:`);
+    console.log(`     rea analyze-javascript-application "<ruta_core.asar>" --json\n`);
+    console.log(`  2. Decompilación de Addons de Audio C++ (.node):`);
+    console.log(`     rea open-binary "<ruta_voice.node>" --provider ghidra --json\n`);
+    console.log(`  3. Comparación Semántica de Exportaciones entre Versiones:`);
+    console.log(`     rea compare-javascript-export-shapes --left <ev1> --right <ev2> --json\n`);
+    console.log(`  4. Depuración Pasiva de Discord Activities (CDP):`);
+    console.log(`     rea list-browser-targets --json`);
+    return;
+  }
+
   console.log(`Comandos disponibles:`);
   console.log(`  audit     - Muestra el estado del ecosistema y componentes`);
   console.log(`  baseline  - Congela el catálogo de rutas, eventos y versiones`);
   console.log(`  diff      - Compara un package.json contra el baseline`);
   console.log(`  update    - Inspecciona y actualiza un paquete específico`);
+  console.log(`  rea       - Guía y comandos de ingeniería inversa con REA`);
 }
 
 main().catch((err) => {

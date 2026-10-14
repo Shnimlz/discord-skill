@@ -17,6 +17,8 @@ Para construir un bot sin el enredo de buscar en tutoriales genéricos o foros d
 * 🎙️ [**La Anatomía del Handshake de Voz**](references/voice-handshake-and-streaming.md): Cómo sincronizar `VOICE_STATE_UPDATE` + `VOICE_SERVER_UPDATE`, manejar migraciones de servidor en vivo y conectar nodos de audio (Lavalink / `@discordjs/voice`).
 * ⚡ [**Resiliencia en el Ciclo de Vida de Interacciones**](references/interaction-lifecycle-resilience.md): La ventana de 3 segundos, auto-defer inteligente, y cómo prevenir errores `10062 Unknown Interaction` o `InteractionAlreadyReplied`.
 * 🎮 [**Arquitectura de Discord Activities (Embedded Apps)**](references/embedded-activities-architecture.md): Intercambio de tokens OAuth2, superación del CSP mediante URL Mappings y sincronización Rich Presence.
+* 🔍 [**Investigaciones de Ingeniería Inversa con REA**](references/rea-discord-investigations.md): Auditoría de ASAR de Electron, decompilación de módulos C++ (`.node`) en Ghidra, comparación semántica de exportaciones y depuración pasiva de actividades vía CDP.
+* 🛡️ [**Reglas y Límites de Ingeniería Inversa**](../../rules/discord-rea-boundary.md): Las 4 reglas invariables (No Selfbots / ToS, integridad de evidencia, cero extracción de secretos y ruteo seguro).
 
 ---
 
