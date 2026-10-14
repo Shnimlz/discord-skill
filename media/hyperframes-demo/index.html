@@ -3,67 +3,156 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>discord-skill — HyperFrames Video Composition</title>
+  <title>discord-skill — Production Demo</title>
   <link rel="stylesheet" href="style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
   <div class="video-canvas" id="canvas">
-    <!-- Header Brand -->
-    <header class="brand-bar">
-      <div class="logo">
-        <span class="bot-icon">🤖</span>
-        <span class="title">discord-skill</span>
-        <span class="badge">Ecosystem & Agent Skill</span>
+    <!-- Ambient Backdrop Light -->
+    <div class="ambient-glow ambient-top"></div>
+    <div class="ambient-glow ambient-bottom"></div>
+
+    <!-- Top Navigation & Brand Deck -->
+    <header class="deck-header">
+      <div class="brand-group">
+        <div class="brand-badge-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M19.27 5.33C17.94 4.71 16.5 4.26 15 4a.09.09 0 0 0-.07.03c-.18.33-.39.76-.53 1.09a16.09 16.09 0 0 0-4.8 0c-.14-.34-.35-.76-.54-1.09-.01-.02-.04-.03-.07-.03-1.5.26-2.93.71-4.27 1.33-.01 0-.02.01-.03.02-2.72 4.07-3.47 8.03-3.1 11.95 0 .02.01.04.03.05 1.8 1.32 3.53 2.12 5.24 2.65.03.01.06 0 .07-.02.4-.55.76-1.13 1.07-1.74.02-.04 0-.08-.04-.09-.57-.22-1.11-.48-1.64-.78-.04-.02-.04-.08-.01-.11.11-.08.22-.17.33-.25.02-.02.05-.02.07-.01 3.44 1.57 7.15 1.57 10.55 0 .02-.01.05-.01.07.01.11.09.22.17.33.26.04.03.04.08-.01.11-.52.31-1.07.56-1.64.78-.04.01-.05.06-.04.09.32.61.68 1.19 1.07 1.74.03.01.06.02.09.02 1.72-.53 3.45-1.33 5.25-2.65.02-.01.03-.03.03-.05.44-4.53-.73-8.46-3.1-11.95-.01-.01-.02-.02-.04-.02zM8.52 14.91c-1.03 0-1.89-.95-1.89-2.12s.84-2.12 1.89-2.12c1.06 0 1.9.96 1.89 2.12 0 1.17-.84 2.12-1.89 2.12zm6.97 0c-1.03 0-1.89-.95-1.89-2.12s.84-2.12 1.89-2.12c1.06 0 1.9.96 1.89 2.12 0 1.17-.83 2.12-1.89 2.12z" fill="#FFFFFF"/>
+          </svg>
+        </div>
+        <div class="brand-titles">
+          <span class="product-name">discord-skill</span>
+          <span class="product-subtitle">Universal Bot Infrastructure & Contract Auditor</span>
+        </div>
       </div>
-      <div class="runtimes-pill">
-        <span class="dot"></span> Codex • Claude • Gemini • Antigravity
+
+      <!-- Telemetry System Stats -->
+      <div class="telemetry-bar">
+        <div class="stat-chip">
+          <span class="chip-pulse"></span>
+          <span class="chip-label">SYSTEM</span>
+          <span class="chip-val green">OPERATIONAL</span>
+        </div>
+        <div class="stat-chip">
+          <span class="chip-label">ENGINE</span>
+          <span class="chip-val">ZERO-OOP CORE</span>
+        </div>
+        <div class="stat-chip">
+          <span class="chip-label">MEMORY</span>
+          <span class="chip-val cyan">28.4 MB</span>
+        </div>
       </div>
     </header>
 
-    <!-- Main Terminal Window -->
-    <main class="terminal-card">
-      <div class="terminal-header">
-        <div class="window-controls">
-          <span class="ctrl close"></span>
-          <span class="ctrl min"></span>
-          <span class="ctrl max"></span>
+    <!-- Main Workspace Terminal Card -->
+    <main class="terminal-deck">
+      <div class="terminal-topbar">
+        <div class="dots-group">
+          <span class="dot close"></span>
+          <span class="dot min"></span>
+          <span class="dot max"></span>
         </div>
-        <div class="terminal-title">bash — npx discord-skill (Cross-Runtime Agent Skill)</div>
-        <div class="mode-tag">PRODUCTION AUDITOR</div>
+
+        <div class="terminal-tabs">
+          <div class="tab-item active">
+            <svg class="tab-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="4 17 10 11 4 5"></polyline>
+              <line x1="12" y1="19" x2="20" y2="19"></line>
+            </svg>
+            <span class="tab-name">terminal — zsh</span>
+            <span class="tab-git-branch">main*</span>
+          </div>
+        </div>
+
+        <div class="topbar-actions">
+          <span class="runtime-tag">Codex • Claude • Gemini • Antigravity</span>
+        </div>
       </div>
 
-      <div class="terminal-body" id="terminal-content">
-        <!-- Dynamic scenes typed by script.js -->
-        <div class="line prompt-line">
-          <span class="ps1">shnimlz@dev:~$</span>
-          <span class="typed-command" id="cmd-text"></span>
-          <span class="cursor" id="cursor">█</span>
+      <!-- Terminal Body Content -->
+      <div class="terminal-screen" id="terminal-screen">
+        <div class="prompt-row">
+          <span class="prompt-user">shnimlz@dev</span>
+          <span class="prompt-sep">:</span>
+          <span class="prompt-path">~/github/bot</span>
+          <span class="prompt-char">$</span>
+          <span class="command-input" id="cmd-text"></span>
+          <span class="blinking-caret" id="caret"></span>
         </div>
 
-        <div class="output-container" id="terminal-output"></div>
+        <div class="screen-output" id="terminal-output"></div>
       </div>
     </main>
 
-    <!-- Footer Progress & Features Bar -->
-    <footer class="footer-bar">
-      <div class="feature-item" id="f-install">
-        <span class="num">01</span>
-        <span class="txt">1-Command Multi-Runtime</span>
+    <!-- Bottom Interactive Steps Deck -->
+    <footer class="pipeline-footer">
+      <div class="step-card" id="step-install">
+        <div class="step-indicator">
+          <span class="step-index">01</span>
+          <div class="step-icon-wrap">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2 2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+          </div>
+        </div>
+        <div class="step-content">
+          <span class="step-title">Multi-Runtime</span>
+          <span class="step-desc">1-Command Deployment</span>
+        </div>
       </div>
-      <div class="feature-item" id="f-audit">
-        <span class="num">02</span>
-        <span class="txt">15 Packages & 113 Routes</span>
+
+      <div class="step-card" id="step-audit">
+        <div class="step-indicator">
+          <span class="step-index">02</span>
+          <div class="step-icon-wrap">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+          </div>
+        </div>
+        <div class="step-content">
+          <span class="step-title">Protocol Audit</span>
+          <span class="step-desc">15 Packages • 113 Routes</span>
+        </div>
       </div>
-      <div class="feature-item" id="f-diff">
-        <span class="num">03</span>
-        <span class="txt">API Drift Detection</span>
+
+      <div class="step-card" id="step-diff">
+        <div class="step-indicator">
+          <span class="step-index">03</span>
+          <div class="step-icon-wrap">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+              <circle cx="18" cy="18" r="3"></circle>
+              <circle cx="6" cy="6" r="3"></circle>
+              <path d="M13 6h3a2 2 0 0 1 2 2v7"></path>
+              <line x1="6" y1="9" x2="6" y2="21"></line>
+            </svg>
+          </div>
+        </div>
+        <div class="step-content">
+          <span class="step-title">Contract Drift</span>
+          <span class="step-desc">Dependency Sentinel</span>
+        </div>
       </div>
-      <div class="feature-item" id="f-rea">
-        <span class="num">04</span>
-        <span class="txt">REA Reverse Engineering</span>
+
+      <div class="step-card" id="step-rea">
+        <div class="step-indicator">
+          <span class="step-index">04</span>
+          <div class="step-icon-wrap">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+            </svg>
+          </div>
+        </div>
+        <div class="step-content">
+          <span class="step-title">REA Forensics</span>
+          <span class="step-desc">C++ Addons & ASAR Lab</span>
+        </div>
       </div>
     </footer>
   </div>

@@ -46,8 +46,10 @@ const RUNTIMES = [
   },
 ];
 
-console.log(`\n🚀 [discord-skill] Instalador Unificado Multi-Runtime`);
-console.log(`Instalando skill en todos los entornos detectados (Codex, Claude Code, Gemini CLI, Antigravity)...\n`);
+console.log(
+  `\n🚀 [discord-skill] Instalador Unificado Multi-Runtime\n` +
+  `Instalando skill en todos los entornos detectados (Codex, Claude Code, Gemini CLI, Antigravity)...\n`
+);
 
 let installedCount = 0;
 
@@ -70,5 +72,7 @@ for (const runtime of RUNTIMES) {
   }
 }
 
-console.log(`\n🎉 Instalación completada con éxito en ${installedCount} entorno(s).`);
-console.log(`Ahora puedes usar la skill directamente en tus prompts con cualquier agente.\n`);
+console.log(
+  `\n🎉 Instalación completada con éxito en ${installedCount} entorno(s).\n` +
+  `Ahora puedes usar la skill directamente en tus prompts con cualquier agente.\n`
+);

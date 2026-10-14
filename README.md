@@ -13,32 +13,24 @@ El ecosistema de Discord.js no es solo una librería; es un monorepo masivo de c
 
 ## 🎬 Demostración en Video (HyperFrames)
 
-Este proyecto incluye una composición de video programática generada con [**HyperFrames**](https://github.com/heygen-com/hyperframes) en [`media/hyperframes-demo/`](media/hyperframes-demo/):
+Este proyecto incluye una composición de video programática diseñada bajo los más altos estándares de UI/UX ([**HyperFrames**](https://github.com/heygen-com/hyperframes)) en [`media/hyperframes-demo/`](media/hyperframes-demo/):
 
-```
-+-------------------------------------------------------------------------------+
-|  🤖 discord-skill                   ● Codex • Claude • Gemini • Antigravity   |
-|  +-------------------------------------------------------------------------+  |
-|  | bash - npx discord-skill (Cross-Runtime Agent Skill)                    |  |
-|  | shnimlz@dev:~$ npx discord-skill install                                |  |
-|  | ✔ Antigravity / Gemini CLI  : ~/.gemini/config/skills/discord-skill     |  |
-|  | ✔ Claude Code               : ~/.claude/skills/discord-skill            |  |
-|  | ✔ Codex CLI                 : ~/.codex/skills/discord-skill             |  |
-|  | ✔ Universal Agent Skills    : ~/.agents/skills/discord-skill            |  |
-|  |                                                                         |  |
-|  | 🎉 Instalación completada con éxito en 4 entornos en 1 solo comando.    |  |
-|  +-------------------------------------------------------------------------+  |
-|  [01 1-Command Install]  [02 15 Packages Audit]  [03 Drift Diff]  [04 REA Lab]|
-+-------------------------------------------------------------------------------+
-```
+<p align="center">
+  <img src="assets/demo-preview.png" alt="discord-skill HyperFrames Demo" width="100%" style="border-radius: 14px; border: 1px solid rgba(255,255,255,0.08); box-shadow: 0 20px 50px rgba(0,0,0,0.6);" />
+</p>
 
-### Previsualizar o Renderizar el Video:
+> 🎥 **Video Renderizado:** Disponible en alta fidelidad en [`assets/demo.webm`](assets/demo.webm) (captura determinista a 60 FPS de las 4 escenas).
+
+### Previsualizar o Renderizar Localmente:
 ```bash
-# Previsualizar la composición animada en el navegador:
+# 1. Previsualizar la composición animada interactiva en el navegador:
 npx hyperframes preview media/hyperframes-demo
 
-# Compilar y exportar el video final a MP4 determinista:
+# 2. Compilar y exportar el video final determinista a MP4/WebM:
 npx hyperframes render media/hyperframes-demo -o assets/demo.mp4
+
+# 3. O ejecutar la grabación automatizada con Playwright:
+node scripts/record-demo.mjs
 ```
 
 ---
