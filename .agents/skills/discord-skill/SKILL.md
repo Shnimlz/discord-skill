@@ -1,92 +1,87 @@
 ---
 name: discord-skill
-description: Comprehensive skill for the entire Discord.js ecosystem (discord.js, discord-api-types, @discordjs/core, @discordjs/rest, @discordjs/ws, @discordjs/voice, @discordjs/builders, @discordjs/brokers, @discordjs/proxy). Covers architectural decisions, zero-cache botting, low-level Gateway/REST manipulation, voice UDP pipelines, and API contract drift auditing.
+description: Comprehensive skill for the entire Discord.js ecosystem (discord.js, discord-api-types, @discordjs/core, @discordjs/rest, @discordjs/ws, @discordjs/voice, @discordjs/builders, @discordjs/brokers, @discordjs/proxy). Covers architectural blueprints, zero-cache low-level botting, Presenter pattern, voice UDP handshakes, interaction resilience, and API contract drift auditing.
 ---
 
 # Discord Skill
 
-A foundational guide and operational protocol for engineering high-performance, distributed, and low-level Discord applications across the full **discord.js** ecosystem.
+A foundational guide, playbook, and operational protocol for engineering high-performance, distributed, and low-level Discord applications across the full **discord.js** ecosystem.
 
-## 1. Ecosystem Matrix & Component Selection
+## 1. Guías de Ingeniería de Batalla (Deep Dives)
 
-Never default to `discord.js` monolith for every scenario. Select the appropriate tool from the modular ecosystem:
+Para construir un bot sin el enredo de buscar en tutoriales genéricos o foros desactualizados, consulta directamente los manuales especializados:
 
-| Need / Constraint | Recommended Package | Architectural Advantage |
-| :--- | :--- | :--- |
-| **High Memory Constraints / 50k+ Guilds** | `@discordjs/core` + `@discordjs/ws` | Zero OOP overhead. Skips creating heavy `Guild`, `Message` and `User` instances. Uses plain JSON objects. |
-| **Microservices / Distributed Shards** | `@discordjs/brokers` | Decouples Gateway dispatch from business logic over message queues (RabbitMQ, Kafka, Redis). |
-| **Shared Global Rate Limiting** | `@discordjs/proxy` | A standalone HTTP proxy microservice that centralizes bucket queues across multiple bot instances. |
-| **Raw REST / Serverless Interactions** | `@discordjs/rest` | Pure HTTP requests with Ed25519 signature validation (ideal for Cloudflare Workers / AWS Lambda). |
-| **Real-Time Voice & Audio** | `@discordjs/voice` | WebRTC/UDP protocol handling, ChaCha20/XSalsa20 encryption, Opus decoding/encoding, and Voice Receive streams. |
-| **Type-Safe Slash & UI Components** | `@discordjs/builders` | Declarative definitions for Slash commands, Subcommands, Action Rows, Modals, and Select Menus. |
-| **Canonical API Specs & Flags** | `discord-api-types` | Bitfield flags, raw Gateway event names, and exact REST payload types for Discord API v9/v10. |
-| **Standard Monolith / Rapid Prototyping** | `discord.js` | Built-in caching, collections, sweepers, and unified event emitters. |
+* 🚀 [**Creando un Bot de Bajo Nivel (Zero-Overhead)**](references/low-level-bot-architecture.md): Cómo montar un bot de 30 MB de RAM usando `@discordjs/core` + `@discordjs/ws` + `@discordjs/rest` sin clases pesadas ni caché forzado.
+* 🏛️ [**Patrón Presenter & Arquitectura Limpia**](references/clean-architecture-presenters.md): Cómo desacoplar la lógica de dominio de la interfaz de Discord (inspirado en el modelo DDC), permitiendo tests 100% offline y soporte i18n limpio.
+* 🎙️ [**La Anatomía del Handshake de Voz**](references/voice-handshake-and-streaming.md): Cómo sincronizar `VOICE_STATE_UPDATE` + `VOICE_SERVER_UPDATE`, manejar migraciones de servidor en vivo y conectar nodos de audio (Lavalink / `@discordjs/voice`).
+* ⚡ [**Resiliencia en el Ciclo de Vida de Interacciones**](references/interaction-lifecycle-resilience.md): La ventana de 3 segundos, auto-defer inteligente, y cómo prevenir errores `10062 Unknown Interaction` o `InteractionAlreadyReplied`.
+* 🎮 [**Arquitectura de Discord Activities (Embedded Apps)**](references/embedded-activities-architecture.md): Intercambio de tokens OAuth2, superación del CSP mediante URL Mappings y sincronización Rich Presence.
 
 ---
 
-## 2. Low-Level Capabilities & Deep Internals
+## 2. Matriz de Selección del Ecosistema
 
-### A. Raw Gateway & Packet Interception
-When bypassing the standard caching pipeline, hook directly into the WebSocket dispatch:
+Nunca uses el monolito `discord.js` por defecto para cualquier tarea. Selecciona el componente exacto según el requerimiento:
+
+| Requisito / Restricción | Paquete Recomendado | Ventaja Arquitectónica |
+| :--- | :--- | :--- |
+| **Alta concurrencia / Memoria Crítica** | `@discordjs/core` + `@discordjs/ws` | Cero OOP overhead. Omite instancias `Guild`, `Message` o `User`. Trabaja con JSONs planos. |
+| **Microservicios / Sharding Distribuido** | `@discordjs/brokers` | Desacopla la recepción del Gateway de la lógica de negocio mediante colas (RabbitMQ, Kafka, Redis). |
+| **Rate Limiting Global Compartido** | `@discordjs/proxy` | Microservicio HTTP independiente que centraliza las colas de buckets entre múltiples procesos o contenedores. |
+| **Serverless / Endpoints HTTP Puros** | `@discordjs/rest` | Peticiones HTTP directas con verificación de firma Ed25519 (Cloudflare Workers / AWS Lambda). |
+| **Voz en Tiempo Real (Tx / Rx)** | `@discordjs/voice` | Protocolo WebRTC/UDP, cifrado ChaCha20/XSalsa20, Opus decoding y Voice Receive streams para IA/VAD. |
+| **UI Components y Slash Commands** | `@discordjs/builders` | Constructores tipados para Slash commands, Subcomandos, Action Rows, Modals y Select Menus. |
+| **Especificaciones Canónicas y Flags** | `discord-api-types` | Flags de bits, nombres de eventos Gateway y tipos de payloads REST de la API v9/v10. |
+| **Monolito Rápido / Prototipado** | `discord.js` | Caché en memoria, managers automáticos y colecciones tradicionales. |
+
+---
+
+## 3. Capacidades de Bajo Nivel & Rutas Crudas
+
+### A. Intercepción Cruda de Paquetes en Gateway
+Para procesar eventos a velocidad máxima sin instanciar modelos:
 ```typescript
-// Listening to raw Gateway packets without instantiating objects
 client.ws.on('RAW', (packet) => {
   if (packet.t === 'MESSAGE_CREATE') {
-    // Process packet.d directly (plain JSON, near zero memory)
+    // Procesa packet.d directamente (JSON plano, memoria casi nula)
   }
 });
 ```
 
-### B. Unrestricted REST Execution
-Do not wait for library updates when Discord releases experimental or canary features. Execute raw API calls:
+### B. Ejecución REST Sin Restricciones
+Para usar endpoints experimentales o banderas de Discord no contempladas aún en librerías:
 ```typescript
 import { Routes } from 'discord-api-types/v10';
 
-// Raw route invocation with arbitrary payload
 await client.rest.post(Routes.channelMessages(channelId), {
   body: {
-    content: "Experimental message",
-    flags: 1 << 15, // Custom/experimental bit flags
+    content: "Mensaje experimental",
+    flags: 1 << 15, // Bit flags experimentales
   }
 });
 ```
 
-### C. Voice Receive Pipeline (Audio Ingestion)
-To capture real-time audio from users in a voice channel:
-1. Connect via `@discordjs/voice` using `joinVoiceChannel`.
-2. Subscribe to the `receiver`:
-```typescript
-const receiver = connection.receiver;
-receiver.speaking.on('start', (userId) => {
-  const opusStream = receiver.subscribe(userId, {
-    mode: 'opus',
-    end: { behavior: 'afterSilence', duration: 100 },
-  });
-  // Pipe opusStream to an Opus decoder (e.g. prism-media) -> PCM -> Whisper STT / VAD
-});
+---
+
+## 4. Auditoría de Drift de Contratos de la API
+
+Para detectar cambios de versión o nuevos endpoints en tus dependencias:
+
+```bash
+# 1. Auditar componentes y métricas
+pnpm cli audit
+
+# 2. Comparar dependencias del proyecto contra el baseline
+pnpm cli diff ./package.json
+
+# 3. Actualizar la línea base
+pnpm cli baseline
 ```
 
 ---
 
-## 3. Auditing API Contract Drift
+## 5. Invariantes de Seguridad
 
-To detect breaking changes, deprecated fields, or newly added routes between versions:
-
-1. **Check for drift against the baseline**:
-   ```bash
-   pnpm cli diff ./package.json
-   ```
-2. **Review added/removed routes, gateway events, or builders**:
-   * Inspect changes reported in `baselines/baseline.json`.
-   * Update the baseline when upgrades are validated:
-   ```bash
-   pnpm cli baseline
-   ```
-
----
-
-## 4. Engineering Invariants
-
-1. **Token Boundaries**: Never attempt to call User-only endpoints (`/users/@me/billing`, friend requests, group DMs) with a `Bot <token>`. Discord returns `403 Forbidden` and flags the application.
-2. **Backpressure**: In voice streams, ensure Opus decoders drain buffers promptly to avoid memory leaks on high-concurrency voice channels.
-3. **Sweeper Strategy**: When using `discord.js`, configure granular cache limits (`makeCache`) to prevent unbounded RAM expansion.
+1. **Límites de Token**: Jamás llames a endpoints exclusivos de usuario (`/users/@me/billing`, solicitudes de amistad, DMs grupales) con un `Bot <token>`. Discord devuelve `403 Forbidden` y marca la aplicación.
+2. **Backpressure**: En streams de voz entrantes, drena los buffers de Opus inmediatamente para evitar fugas de memoria en llamadas masivas.
+3. **Estrategia de Sweepers**: Al usar `discord.js`, configura límites estrictos de caché (`makeCache`) para evitar consumo desmedido de RAM.
