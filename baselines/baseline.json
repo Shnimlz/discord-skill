@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-10-14T22:05:52.658Z",
+  "timestamp": "2026-10-14T22:22:52.033Z",
   "packages": {
     "discord.js": "14.26.5",
     "discord-api-types": "0.37.119",
@@ -11,7 +11,11 @@
     "@discordjs/brokers": "0.2.1",
     "@discordjs/proxy": "1.1.0",
     "@discordjs/collection": "2.1.1",
-    "@discordjs/formatters": "0.6.0"
+    "@discordjs/formatters": "0.6.0",
+    "@discordjs/rpc": "4.0.1",
+    "@discordjs/structures": "1.0.0-dev",
+    "@discordjs/util": "1.1.0",
+    "next": "15.0.0-dev"
   },
   "routes": [
     "applicationCommand",

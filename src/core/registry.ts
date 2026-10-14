@@ -67,4 +67,28 @@ export const DISCORD_ECOSYSTEM_PACKAGES: Record<string, DiscordPackageMetadata> 
     role: 'utility',
     description: 'String and markdown formatters for Discord timestamps, mentions, blockquotes, and links.',
   },
+  '@discordjs/rpc': {
+    name: '@discordjs/rpc',
+    version: '4.0.1',
+    role: 'infra',
+    description: 'Rich Presence client for desktop apps communicating via local IPC named pipes.',
+  },
+  '@discordjs/structures': {
+    name: '@discordjs/structures',
+    version: '1.0.0-dev',
+    role: 'facade',
+    description: 'Decoupled pure data structures independent of global client caching managers.',
+  },
+  '@discordjs/util': {
+    name: '@discordjs/util',
+    version: '1.1.0',
+    role: 'utility',
+    description: 'Internal bitfield manipulators (BitField), Snowflake validators, and color converters.',
+  },
+  'next': {
+    name: 'next',
+    version: '15.0.0-dev',
+    role: 'facade',
+    description: 'Bleeding-edge canary evolution branch targeting next-generation architectural changes.',
+  },
 };

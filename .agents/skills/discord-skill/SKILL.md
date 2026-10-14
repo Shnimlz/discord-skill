@@ -11,6 +11,7 @@ A foundational guide, playbook, and operational protocol for engineering high-pe
 
 Para construir un bot sin el enredo de buscar en tutoriales genéricos o foros desactualizados, consulta directamente los manuales especializados:
 
+* 📦 [**Enciclopedia Completa del Ecosistema Discord.js (15 Paquetes)**](references/ecosystem-packages-complete.md): Análisis exhaustivo (versión corta y profunda) de cada dependencia del monorepo (`core`, `ws`, `rest`, `voice`, `rpc`, `proxy`, etc.).
 * 🚀 [**Creando un Bot de Bajo Nivel (Zero-Overhead)**](references/low-level-bot-architecture.md): Cómo montar un bot de 30 MB de RAM usando `@discordjs/core` + `@discordjs/ws` + `@discordjs/rest` sin clases pesadas ni caché forzado.
 * 🏛️ [**Patrón Presenter & Arquitectura Limpia**](references/clean-architecture-presenters.md): Cómo desacoplar la lógica de dominio de la interfaz de Discord (inspirado en el modelo DDC), permitiendo tests 100% offline y soporte i18n limpio.
 * 🎙️ [**La Anatomía del Handshake de Voz**](references/voice-handshake-and-streaming.md): Cómo sincronizar `VOICE_STATE_UPDATE` + `VOICE_SERVER_UPDATE`, manejar migraciones de servidor en vivo y conectar nodos de audio (Lavalink / `@discordjs/voice`).
