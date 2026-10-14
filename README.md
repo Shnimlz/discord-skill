@@ -1,10 +1,8 @@
 <h1 align="center">🤖 discord-skill</h1>
-
 <p align="center">
   <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License: MIT"></a>
   <a href="https://discord.js.org"><img src="https://img.shields.io/badge/discord.js-monorepo-5865F2.svg" alt="Discord.js Ecosystem"></a>
   <a href="https://github.com/features/copilot"><img src="https://img.shields.io/badge/Agent%20Skill-Cross--Runtime-orange.svg" alt="Agent Skill"></a>
-  <a href="https://github.com/heygen-com/hyperframes"><img src="https://img.shields.io/badge/Video-HyperFrames-FF0055.svg" alt="HyperFrames"></a>
 </p>
 
 <p align="center">
