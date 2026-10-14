@@ -169,7 +169,17 @@ async function main() {
     return;
   }
 
+  if (command === 'install') {
+    const installScript = path.join(ROOT_DIR, 'scripts/install-skill.mjs');
+    const { spawnSync } = await import('node:child_process');
+
+    spawnSync(process.execPath, [installScript], { stdio: 'inherit' });
+
+    return;
+  }
+
   console.log(`Comandos disponibles:`);
+  console.log(`  install   - Instala la skill en un solo comando (Codex, Claude, Gemini, Antigravity)`);
   console.log(`  audit     - Muestra el estado del ecosistema y componentes`);
   console.log(`  baseline  - Congela el catálogo de rutas, eventos y versiones`);
   console.log(`  diff      - Compara un package.json contra el baseline`);

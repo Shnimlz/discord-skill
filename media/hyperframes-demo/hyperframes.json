@@ -1,0 +1,17 @@
+{
+  "$schema": "https://hyperframes.heygen.com/schema.json",
+  "name": "discord-skill-demo",
+  "version": "1.0.0",
+  "description": "HyperFrames programmatic video composition demonstrating discord-skill CLI and agent capabilities",
+  "entry": "index.html",
+  "fps": 30,
+  "durationSeconds": 14,
+  "dimensions": {
+    "width": 1200,
+    "height": 675
+  },
+  "render": {
+    "output": "assets/demo.mp4",
+    "format": "mp4"
+  }
+}

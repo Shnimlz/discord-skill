@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>discord-skill — HyperFrames Video Composition</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="video-canvas" id="canvas">
+    <!-- Header Brand -->
+    <header class="brand-bar">
+      <div class="logo">
+        <span class="bot-icon">🤖</span>
+        <span class="title">discord-skill</span>
+        <span class="badge">Ecosystem & Agent Skill</span>
+      </div>
+      <div class="runtimes-pill">
+        <span class="dot"></span> Codex • Claude • Gemini • Antigravity
+      </div>
+    </header>
+
+    <!-- Main Terminal Window -->
+    <main class="terminal-card">
+      <div class="terminal-header">
+        <div class="window-controls">
+          <span class="ctrl close"></span>
+          <span class="ctrl min"></span>
+          <span class="ctrl max"></span>
+        </div>
+        <div class="terminal-title">bash — npx discord-skill (Cross-Runtime Agent Skill)</div>
+        <div class="mode-tag">PRODUCTION AUDITOR</div>
+      </div>
+
+      <div class="terminal-body" id="terminal-content">
+        <!-- Dynamic scenes typed by script.js -->
+        <div class="line prompt-line">
+          <span class="ps1">shnimlz@dev:~$</span>
+          <span class="typed-command" id="cmd-text"></span>
+          <span class="cursor" id="cursor">█</span>
+        </div>
+
+        <div class="output-container" id="terminal-output"></div>
+      </div>
+    </main>
+
+    <!-- Footer Progress & Features Bar -->
+    <footer class="footer-bar">
+      <div class="feature-item" id="f-install">
+        <span class="num">01</span>
+        <span class="txt">1-Command Multi-Runtime</span>
+      </div>
+      <div class="feature-item" id="f-audit">
+        <span class="num">02</span>
+        <span class="txt">15 Packages & 113 Routes</span>
+      </div>
+      <div class="feature-item" id="f-diff">
+        <span class="num">03</span>
+        <span class="txt">API Drift Detection</span>
+      </div>
+      <div class="feature-item" id="f-rea">
+        <span class="num">04</span>
+        <span class="txt">REA Reverse Engineering</span>
+      </div>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
