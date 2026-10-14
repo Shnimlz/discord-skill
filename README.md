@@ -11,26 +11,25 @@ El ecosistema de Discord.js no es solo una librería; es un monorepo masivo de c
 
 ---
 
-## 🎬 Demostración en Video (HyperFrames)
-
-Este proyecto incluye una composición de video programática diseñada bajo los más altos estándares de UI/UX ([**HyperFrames**](https://github.com/heygen-com/hyperframes)) en [`media/hyperframes-demo/`](media/hyperframes-demo/):
+## 🎬 Demostración en Video
 
 <p align="center">
-  <img src="assets/demo-preview.png" alt="discord-skill HyperFrames Demo" width="100%" style="border-radius: 14px; border: 1px solid rgba(255,255,255,0.08); box-shadow: 0 20px 50px rgba(0,0,0,0.6);" />
+  <img src="assets/demo.gif" alt="discord-skill HyperFrames Demo Video" width="100%" style="border-radius: 14px; border: 1px solid rgba(255,255,255,0.08); box-shadow: 0 20px 50px rgba(0,0,0,0.6);" />
 </p>
 
-> 🎥 **Video Renderizado:** Disponible en alta fidelidad en [`assets/demo.webm`](assets/demo.webm) (captura determinista a 60 FPS de las 4 escenas).
+> 🎥 **Video Renderizado:** Reproducción interactiva animada generada con [**HyperFrames**](https://github.com/heygen-com/hyperframes) y capturada con Playwright. También disponible en formato de video original en [`assets/demo.webm`](assets/demo.webm).
 
-### Previsualizar o Renderizar Localmente:
+### Previsualizar o Compilar el Video Localmente:
 ```bash
-# 1. Previsualizar la composición animada interactiva en el navegador:
+# 1. Previsualizar la composición interactiva en vivo con HyperFrames:
 npx hyperframes preview media/hyperframes-demo
 
-# 2. Compilar y exportar el video final determinista a MP4/WebM:
+# 2. Renderizar a video determinista con HyperFrames CLI:
 npx hyperframes render media/hyperframes-demo -o assets/demo.mp4
 
-# 3. O ejecutar la grabación automatizada con Playwright:
+# 3. O re-grabar el video y GIF con Playwright:
 node scripts/record-demo.mjs
+python scripts/build-gif.py
 ```
 
 ---
@@ -44,6 +43,7 @@ npx discord-skill install
 ```
 
 O si usas el registro estándar de agent skills:
+
 ```bash
 npx skills add Shnimlz/discord-skill
 ```
@@ -52,23 +52,23 @@ npx skills add Shnimlz/discord-skill
 
 ## 📦 Componentes del Ecosistema Cubiertos (15 Paquetes)
 
-| Módulo | Descripción |
-| :--- | :--- |
-| **`discord.js`** | Fachada principal con caché en memoria y managers de colecciones. |
-| **`discord-api-types`** | Especificación canónica de tipos, enums y payloads de la API de Discord (v9/v10). |
-| **`@discordjs/core`** | Cliente de bot ultra-ligero de cero sobrecarga de memoria (Zero-OOP). |
-| **`@discordjs/ws`** | Motor de WebSocket Gateway independiente con auto-sharding y heartbeats. |
-| **`@discordjs/rest`** | Motor de peticiones HTTP con control estricto de rate limits por bucket. |
-| **`@discordjs/builders`** | Constructores tipados para Slash Commands, Embeds, Modals y Action Rows. |
-| **`@discordjs/voice`** | Protocolo WebRTC/UDP de voz, cifrado y pipelines de audio (Tx/Rx). |
-| **`@discordjs/brokers`** | Comunicación entre procesos y brokers para arquitecturas distribuidas. |
-| **`@discordjs/proxy`** | Servidor proxy HTTP para centralizar rate limits entre múltiples procesos. |
-| **`@discordjs/collection`** | Estructuras de datos avanzadas (Map extendido y LRU Sweepers). |
-| **`@discordjs/formatters`** | Utilidades de formateo para timestamps interactivos y menciones de Discord. |
-| **`@discordjs/rpc`** | Rich Presence en escritorio mediante sockets IPC locales. |
-| **`@discordjs/structures`** | Modelos y estructuras desacopladas de clientes globales. |
-| **`@discordjs/util`** | Bitfields de alta velocidad y validadores compartidos. |
-| **`next`** | Seguimiento continuo de la próxima gran versión (v15 / canary). |
+| Módulo                      | Descripción                                                                       |
+| :-------------------------- | :-------------------------------------------------------------------------------- |
+| **`discord.js`**            | Fachada principal con caché en memoria y managers de colecciones.                 |
+| **`discord-api-types`**     | Especificación canónica de tipos, enums y payloads de la API de Discord (v9/v10). |
+| **`@discordjs/core`**       | Cliente de bot ultra-ligero de cero sobrecarga de memoria (Zero-OOP).             |
+| **`@discordjs/ws`**         | Motor de WebSocket Gateway independiente con auto-sharding y heartbeats.          |
+| **`@discordjs/rest`**       | Motor de peticiones HTTP con control estricto de rate limits por bucket.          |
+| **`@discordjs/builders`**   | Constructores tipados para Slash Commands, Embeds, Modals y Action Rows.          |
+| **`@discordjs/voice`**      | Protocolo WebRTC/UDP de voz, cifrado y pipelines de audio (Tx/Rx).                |
+| **`@discordjs/brokers`**    | Comunicación entre procesos y brokers para arquitecturas distribuidas.            |
+| **`@discordjs/proxy`**      | Servidor proxy HTTP para centralizar rate limits entre múltiples procesos.        |
+| **`@discordjs/collection`** | Estructuras de datos avanzadas (Map extendido y LRU Sweepers).                    |
+| **`@discordjs/formatters`** | Utilidades de formateo para timestamps interactivos y menciones de Discord.       |
+| **`@discordjs/rpc`**        | Rich Presence en escritorio mediante sockets IPC locales.                         |
+| **`@discordjs/structures`** | Modelos y estructuras desacopladas de clientes globales.                          |
+| **`@discordjs/util`**       | Bitfields de alta velocidad y validadores compartidos.                            |
+| **`next`**                  | Seguimiento continuo de la próxima gran versión (v15 / canary).                   |
 
 ---
 
@@ -96,18 +96,20 @@ Este repositorio incluye una especificación de skill en:
 [`.agents/skills/discord-skill/SKILL.md`](.agents/skills/discord-skill/SKILL.md)
 
 Las IAs pueden cargar esta skill para:
-* Recomendar la separación entre `@discordjs/core` y `discord.js` para reducir consumo de RAM.
-* Guiar la implementación de pipelines de **Voice Receive** con Opus y STT (Whisper).
-* Detectar rutas y eventos nuevos de Discord antes de que salgan en tutoriales públicos.
-* Asegurar que no se llamen endpoints restringidos a usuarios (`Bot Token` safety boundaries).
+
+- Recomendar la separación entre `@discordjs/core` y `discord.js` para reducir consumo de RAM.
+- Guiar la implementación de pipelines de **Voice Receive** con Opus y STT (Whisper).
+- Detectar rutas y eventos nuevos de Discord antes de que salgan en tutoriales públicos.
+- Asegurar que no se llamen endpoints restringidos a usuarios (`Bot Token` safety boundaries).
 
 ---
 
 ## 🤝 Contribuciones de la Comunidad
 
 ¡Buscamos la colaboración de todos los creadores de bots!
-* ¿Encontraste un endpoint indocumentado o experimental?
-* ¿Quieres aportar un extractor AST más profundo para `@discordjs/voice` o `@discordjs/brokers`?
+
+- ¿Encontraste un endpoint indocumentado o experimental?
+- ¿Quieres aportar un extractor AST más profundo para `@discordjs/voice` o `@discordjs/brokers`?
 
 Revisa [CONTRIBUTING.md](CONTRIBUTING.md) para enviar tu Pull Request.
 
@@ -115,4 +117,4 @@ Revisa [CONTRIBUTING.md](CONTRIBUTING.md) para enviar tu Pull Request.
 
 ## 📄 Licencia
 
-MIT © 2026 DDC & Discord Bot Developers Community.
+MIT © 2026 Shnimlz & Discord Bot Developers Community.
