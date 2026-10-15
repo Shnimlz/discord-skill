@@ -1,99 +1,215 @@
-<h1 align="center">🤖 discord-skill</h1>
-<p align="center">
-  <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License: MIT"></a>
-  <a href="https://discord.js.org"><img src="https://img.shields.io/badge/discord.js-monorepo-5865F2.svg" alt="Discord.js Ecosystem"></a>
-  <a href="https://github.com/features/copilot"><img src="https://img.shields.io/badge/Agent%20Skill-Cross--Runtime-orange.svg" alt="Agent Skill"></a>
-</p>
+<div align="center">
 
-<p align="center">
-  <img src="assets/demo.gif" alt="discord-skill HyperFrames Demo Video" width="100%" style="border-radius: 14px; border: 1px solid rgba(255,255,255,0.08); box-shadow: 0 20px 50px rgba(0,0,0,0.6);" />
-</p>
+# 🤖 discord-skill
 
-**`discord-skill`** es una suite dual de **Agent Skill (para IAs)** y **CLI de Auditoría (para desarrolladores)** diseñada para explorar, auditar y aprovechar todo el ecosistema modular de **Discord.js** y la **Discord API**.
+**The Agent Skill and audit CLI for the entire discord.js ecosystem.**
+Pick the right package, build zero-overhead bots, and catch Discord API contract drift before it breaks production.
 
-El ecosistema de Discord.js no es solo una librería; es un monorepo masivo de componentes (`core`, `ws`, `rest`, `voice`, `builders`, `brokers`, `proxy`, `collection`, `formatters`, `discord-api-types`). `discord-skill` permite auditar cambios de contrato entre versiones, optimizar el uso de memoria y aplicar patrones arquitectónicos de alto rendimiento.
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.6-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![pnpm](https://img.shields.io/badge/pnpm-workspace-F69220?logo=pnpm&logoColor=white)](https://pnpm.io/)
+[![discord.js](https://img.shields.io/badge/discord.js-14-5865F2?logo=discord&logoColor=white)](https://discord.js.org)
+[![Agent Skill](https://img.shields.io/badge/Agent%20Skill-cross--runtime-orange)](#-quick-start)
+[![Stars](https://img.shields.io/github/stars/Shnimlz/discord-skill?style=flat&logo=github)](https://github.com/Shnimlz/discord-skill/stargazers)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
 
-## ⚡ Instalación en un Solo Comando (Multi-Runtime)
+[**Quick Start**](#-quick-start) · [**Why**](#-why-discord-skill) · [**Choosing a Package**](#-choosing-the-right-package) · [**CLI**](#-cli-reference) · [**Knowledge Base**](#-knowledge-base) · [**Contributing**](#-contributing)
 
-Instala la skill automáticamente en todos los entornos de agentes de tu sistema (**Codex**, **Claude Code**, **Gemini CLI** y **Antigravity**):
+<img src="assets/demo.gif" alt="discord-skill demo" width="720">
+
+</div>
+
+
+## 🤔 Why discord-skill?
+
+discord.js is not one library: it is a monorepo of **15 packages**. Yet most tutorials, and most AI assistants, reach for the full `discord.js` monolith every time. That leads to three recurring problems:
+
+| Problem | What happens |
+| --- | --- |
+| **Wrong tool for the job** | A 30 MB bot becomes a 300 MB bot because nobody told you `@discordjs/core` existed. |
+| **Stale knowledge** | Tutorials lag behind Discord's API; new routes and flags show up months before they are documented. |
+| **Silent contract drift** | A dependency bump changes a payload or enum and nothing fails until production. |
+
+`discord-skill` ships two things to fix that:
+
+- 🧠 **An Agent Skill** that teaches your AI coding agent the whole ecosystem: architecture, low-level patterns, voice, interaction resilience and safety boundaries.
+- 🛠️ **An audit CLI** that inspects the ecosystem and compares your project's dependencies against a frozen baseline so you can detect drift.
+
+
+## ✨ Features
+
+| 🧠 For AI agents | 🛠️ For developers |
+| --- | --- |
+| Package-selection matrix: never default to the monolith | `audit`: full catalog of components and protocol metrics |
+| Zero-cache, low-level bot blueprints (`core` + `ws` + `rest`) | `diff`: compare your `package.json` against the baseline |
+| Voice handshake and Voice Receive pipelines (Opus, STT) | `baseline`: freeze or refresh the reference snapshot |
+| Interaction lifecycle patterns (3-second window, auto-defer) | `rea`: reverse-engineering lab for Discord investigations |
+| Built-in safety invariants for bot tokens | One-command install across agent runtimes |
+
+
+## 🚀 Quick Start
+
+### Install the skill
+
+Installs `discord-skill` into every supported agent environment found on your machine (**Codex**, **Claude Code**, **Gemini CLI** and **Antigravity**):
 
 ```bash
 npx discord-skill install
 ```
 
-O si usas el registro estándar de agent skills:
+Or through the standard agent-skills registry:
 
 ```bash
 npx skills add Shnimlz/discord-skill
 ```
 
----
+Any other agent that loads `SKILL.md`-style skills (for example Cursor) can use the skill file directly: [`.agents/skills/discord-skill/SKILL.md`](.agents/skills/discord-skill/SKILL.md).
 
-## 📦 Componentes del Ecosistema Cubiertos (15 Paquetes)
-
-| Módulo                      | Descripción                                                                       |
-| :-------------------------- | :-------------------------------------------------------------------------------- |
-| **`discord.js`**            | Fachada principal con caché en memoria y managers de colecciones.                 |
-| **`discord-api-types`**     | Especificación canónica de tipos, enums y payloads de la API de Discord (v9/v10). |
-| **`@discordjs/core`**       | Cliente de bot ultra-ligero de cero sobrecarga de memoria (Zero-OOP).             |
-| **`@discordjs/ws`**         | Motor de WebSocket Gateway independiente con auto-sharding y heartbeats.          |
-| **`@discordjs/rest`**       | Motor de peticiones HTTP con control estricto de rate limits por bucket.          |
-| **`@discordjs/builders`**   | Constructores tipados para Slash Commands, Embeds, Modals y Action Rows.          |
-| **`@discordjs/voice`**      | Protocolo WebRTC/UDP de voz, cifrado y pipelines de audio (Tx/Rx).                |
-| **`@discordjs/brokers`**    | Comunicación entre procesos y brokers para arquitecturas distribuidas.            |
-| **`@discordjs/proxy`**      | Servidor proxy HTTP para centralizar rate limits entre múltiples procesos.        |
-| **`@discordjs/collection`** | Estructuras de datos avanzadas (Map extendido y LRU Sweepers).                    |
-| **`@discordjs/formatters`** | Utilidades de formateo para timestamps interactivos y menciones de Discord.       |
-| **`@discordjs/rpc`**        | Rich Presence en escritorio mediante sockets IPC locales.                         |
-| **`@discordjs/structures`** | Modelos y estructuras desacopladas de clientes globales.                          |
-| **`@discordjs/util`**       | Bitfields de alta velocidad y validadores compartidos.                            |
-| **`next`**                  | Seguimiento continuo de la próxima gran versión (v15 / canary).                   |
-
----
-
-## 🚀 Uso del CLI para Desarrolladores
+### Run the CLI from source
 
 ```bash
-# 1. Auditar el catálogo completo de componentes y métricas del protocolo
+git clone https://github.com/Shnimlz/discord-skill.git
+cd discord-skill
+pnpm install
+
+pnpm cli audit
+```
+
+
+## 🧭 Choosing the Right Package
+
+Never use the `discord.js` monolith by default. Pick the component that matches the requirement:
+
+| Requirement | Package | Why |
+| --- | --- | --- |
+| High concurrency / memory-critical | `@discordjs/core` + `@discordjs/ws` | No OOP overhead: no `Guild`, `Message` or `User` instances, just plain JSON. |
+| Microservices / distributed sharding | `@discordjs/brokers` | Decouples Gateway intake from business logic through queues (RabbitMQ, Kafka, Redis). |
+| Shared global rate limiting | `@discordjs/proxy` | Standalone HTTP service that centralizes bucket queues across processes or containers. |
+| Serverless / pure HTTP endpoints | `@discordjs/rest` | Direct HTTP calls with Ed25519 signature verification (Cloudflare Workers, AWS Lambda). |
+| Real-time voice (Tx / Rx) | `@discordjs/voice` | UDP voice protocol, ChaCha20 / XSalsa20 encryption, Opus decoding and Voice Receive streams. |
+| Slash commands and UI components | `@discordjs/builders` | Typed builders for commands, subcommands, action rows, modals and select menus. |
+| Canonical specs and bit flags | `discord-api-types` | Gateway event names, bit flags and REST payload types for API v9/v10. |
+| Fast monolith / prototyping | `discord.js` | In-memory cache, automatic managers and classic collections. |
+
+---
+
+## 📦 Ecosystem Coverage
+
+All 15 packages of the ecosystem are covered:
+
+| Package | Role |
+| --- | --- |
+| `discord.js` | Main facade with in-memory cache and collection managers |
+| `discord-api-types` | Canonical types, enums and payloads for the Discord API (v9/v10) |
+| `@discordjs/core` | Ultra-light, zero-overhead bot client |
+| `@discordjs/ws` | Standalone Gateway WebSocket engine with auto-sharding and heartbeats |
+| `@discordjs/rest` | HTTP engine with strict per-bucket rate-limit handling |
+| `@discordjs/builders` | Typed builders for slash commands, embeds, modals and action rows |
+| `@discordjs/voice` | Voice protocol, encryption and audio pipelines |
+| `@discordjs/brokers` | Inter-process communication for distributed architectures |
+| `@discordjs/proxy` | HTTP proxy that centralizes rate limits across processes |
+| `@discordjs/collection` | Extended `Map` and LRU sweepers |
+| `@discordjs/formatters` | Timestamp and mention formatting helpers |
+| `@discordjs/rpc` | Desktop Rich Presence over local IPC sockets |
+| `@discordjs/structures` | Data models decoupled from global clients |
+| `@discordjs/util` | High-speed bitfields and shared validators |
+| `next` | Tracking of the upcoming major version (v15 / canary) |
+
+## 🛠️ CLI Reference
+
+| Command | What it does |
+| --- | --- |
+| `pnpm cli audit` | Audits the full component catalog and protocol metrics. |
+| `pnpm cli diff <path/to/package.json>` | Compares a project's dependencies against the baseline to detect drift. |
+| `pnpm cli baseline` | Freezes or refreshes the baseline snapshot. |
+| `pnpm cli rea` | Opens the reverse-engineering lab (see [boundaries](#-safety-boundaries)). |
+
+Typical drift-check workflow:
+
+```bash
+# 1. See what the ecosystem looks like today
 pnpm cli audit
 
-# 2. Comparar dependencias contra la línea base de la skill (detectar drift)
-pnpm cli diff ../tu-proyecto/package.json
+# 2. Compare your bot against the baseline
+pnpm cli diff ../my-bot/package.json
 
-# 3. Congelar o actualizar la línea base (baseline)
+# 3. Happy with the new state? Refresh the baseline
 pnpm cli baseline
-
-# 4. Laboratorio de ingeniería inversa con REA
-pnpm cli rea
 ```
 
 ---
 
-## 🧠 Como Agent Skill (Antigravity, Claude Code, Cursor, Codex)
+## 📚 Knowledge Base
 
-Este repositorio incluye una especificación de skill en:
-[`.agents/skills/discord-skill/SKILL.md`](.agents/skills/discord-skill/SKILL.md)
+Deep dives the agent (and you) can consult instead of hunting through outdated tutorials. The guides are written in Spanish.
 
-Las IAs pueden cargar esta skill para:
+| Guide | What you get |
+| --- | --- |
+| [Complete ecosystem encyclopedia](.agents/skills/discord-skill/references/ecosystem-packages-complete.md) | In-depth look at each of the 15 packages. |
+| [Low-level bot architecture](.agents/skills/discord-skill/references/low-level-bot-architecture.md) | A ~30 MB RAM bot with `core` + `ws` + `rest`, no heavy classes, no forced cache. |
+| [Presenter pattern and clean architecture](.agents/skills/discord-skill/references/clean-architecture-presenters.md) | Decouple domain logic from the Discord interface for offline tests and clean i18n. |
+| [Voice handshake and streaming](.agents/skills/discord-skill/references/voice-handshake-and-streaming.md) | Sync `VOICE_STATE_UPDATE` + `VOICE_SERVER_UPDATE`, handle live server migrations, connect audio nodes. |
+| [Interaction lifecycle resilience](.agents/skills/discord-skill/references/interaction-lifecycle-resilience.md) | The 3-second window, smart auto-defer, avoiding `10062 Unknown Interaction`. |
+| [Embedded Activities architecture](.agents/skills/discord-skill/references/embedded-activities-architecture.md) | OAuth2 token exchange, CSP URL mappings and Rich Presence sync. |
+| [REA investigations](.agents/skills/discord-skill/references/rea-discord-investigations.md) | Reverse-engineering workflows for Discord research. |
 
-- Recomendar la separación entre `@discordjs/core` y `discord.js` para reducir consumo de RAM.
-- Guiar la implementación de pipelines de **Voice Receive** con Opus y STT (Whisper).
-- Detectar rutas y eventos nuevos de Discord antes de que salgan en tutoriales públicos.
-- Asegurar que no se llamen endpoints restringidos a usuarios (`Bot Token` safety boundaries).
+### Raw-access snippets
 
----
+Process Gateway events without instantiating models:
 
-## 🤝 Contribuciones de la Comunidad
+```js
+client.ws.on('RAW', (packet) => {
+  if (packet.t === 'MESSAGE_CREATE') {
+    // packet.d is plain JSON: near-zero memory overhead
+  }
+});
+```
 
-¡Buscamos la colaboración de todos los creadores de bots!
+Call experimental endpoints and flags before libraries support them:
 
-- ¿Encontraste un endpoint indocumentado o experimental?
-- ¿Quieres aportar un extractor AST más profundo para `@discordjs/voice` o `@discordjs/brokers`?
+```js
+import { Routes } from 'discord-api-types/v10';
 
-Revisa [CONTRIBUTING.md](CONTRIBUTING.md) para enviar tu Pull Request.
+await client.rest.post(Routes.channelMessages(channelId), {
+  body: { content: 'Experimental message', flags: 1 << 15 },
+});
+```
 
----
 
-## 📄 Licencia
+## 🛡️ Safety Boundaries
 
-MIT © 2026 Shnimlz & Discord Bot Developers Community.
+The skill enforces a few invariants so agents do not get your bot flagged:
+
+1. **Token limits**: never call user-only endpoints (`/users/@me/billing`, friend requests, group DMs) with a `Bot <token>`. Discord answers `403 Forbidden` and can flag the application.
+2. **Backpressure**: drain incoming Opus buffers immediately in voice streams to avoid memory leaks in large calls.
+3. **Sweeper strategy**: when using `discord.js`, set strict cache limits (`makeCache`) to keep RAM under control.
+
+Reverse-engineering work is bound by four fixed rules (no selfbots or ToS violations, evidence integrity, zero secret extraction, safe routing). Read them in [`discord-rea-boundary.md`](.agents/rules/discord-rea-boundary.md).
+
+
+## 🧑‍💻 Development
+
+```bash
+pnpm install
+pnpm build   # compile TypeScript
+pnpm lint    # run oxlint
+```
+
+## 🤝 Contributing
+
+Contributions are very welcome. Some ideas:
+
+- Found an undocumented or experimental endpoint? Open an issue or a PR.
+- Want to build a deeper AST extractor for `@discordjs/voice` or `@discordjs/brokers`?
+
+Read [CONTRIBUTING.md](CONTRIBUTING.md) before sending a Pull Request. If `discord-skill` saves you time (or RAM), a ⭐ helps a lot.
+
+
+## ⚠️ Disclaimer
+
+`discord-skill` is an independent community project. It is not affiliated with, endorsed by, or sponsored by Discord Inc. or the discord.js project.
+
+
+## 📜 License
+
+Released under the [MIT License](LICENSE). © 2026 Shnimlz and contributors.
